@@ -86,7 +86,7 @@ export default function WhyChooseUs() {
             Designed for Real-World Competence
           </p>
           <div className="mt-4 h-1 w-12 bg-primary dark:bg-blue-500 mx-auto rounded-full" />
-          <p className="mt-4 text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="mt-4 font-medium text-slate-700 dark:text-slate-200 text-sm sm:text-base leading-relaxed">
             Most institutes teach accounting concepts on whiteboards. At SKV, we give you access to standard ledger tools, tax accounts, and actual company filings.
           </p>
         </div>

@@ -60,7 +60,7 @@ export default function LearningJourney() {
             The SKV 6-Step Career Blueprint
           </p>
           <div className="mt-4 h-1 w-12 bg-primary dark:bg-blue-500 mx-auto rounded-full" />
-          <p className="mt-4 text-slate-500 dark:text-slate-400 text-sm sm:text-base">
+          <p className="mt-4 font-medium text-slate-700 dark:text-slate-200 text-sm sm:text-base">
             From basic training to corporate onboarding, we manage your entire educational and preparation lifecycle.
           </p>
         </div>

@@ -67,7 +67,7 @@ export default function CareerGrowth() {
             Visualize Your Salary & Role Growth
           </p>
           <div className="mt-4 h-1 w-12 bg-primary dark:bg-blue-500 mx-auto rounded-full" />
-          <p className="mt-4 text-slate-500 dark:text-slate-400 text-sm sm:text-base">
+          <p className="mt-4 font-medium text-slate-700 dark:text-slate-200 text-sm sm:text-base">
             Accounting is one of the few fields with a guaranteed upward path. See how your salary scales from a day-one fresher to a finance leader.
           </p>
         </div>
