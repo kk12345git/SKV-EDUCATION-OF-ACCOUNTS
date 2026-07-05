@@ -155,7 +155,7 @@ export default function Courses() {
   return (
     <section 
       id="courses" 
-      className="py-24 bg-slate-50 dark:bg-[#0D111A] border-t border-light-border dark:border-dark-border transition-colors duration-300 noise-bg"
+      className="py-24 bg-light-bg dark:bg-dark-bg border-t border-light-border dark:border-dark-border transition-colors duration-300 grid-bg noise-bg"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -216,10 +216,10 @@ export default function Courses() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
                 key={course.id}
-                className="rounded-2xl border border-light-border dark:border-dark-border bg-white dark:bg-dark-card shadow-sm flex flex-col justify-between overflow-hidden group hover:shadow-md transition-all duration-300"
+                className="rounded-2xl glass-card shadow-lg hover:shadow-xl flex flex-col justify-between overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 dark:hover:border-primary/40"
               >
                 {/* Course Header Banner */}
-                <div className="p-6 pb-4 border-b border-light-border dark:border-dark-border bg-slate-50/50 dark:bg-slate-900/30">
+                <div className="p-6 pb-4 border-b border-light-border dark:border-dark-border bg-primary/5 dark:bg-primary/10">
                   <div className="flex items-start justify-between mb-2">
                     <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2.5 py-1 rounded-md">
                       {course.category}
@@ -258,7 +258,7 @@ export default function Courses() {
                   </div>
 
                   {/* Career & Salaries */}
-                  <div className="grid grid-cols-2 gap-4 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-light-border dark:border-dark-border mb-6">
+                  <div className="grid grid-cols-2 gap-4 p-3.5 rounded-xl glass-card border border-light-border dark:border-dark-border mb-6">
                     <div>
                       <span className="text-[9px] font-bold uppercase text-slate-400 dark:text-slate-500 block mb-0.5">
                         Target Roles
@@ -286,9 +286,9 @@ export default function Courses() {
                 </div>
 
                 {/* Course Fees Section */}
-                <div className="p-6 border-t border-light-border dark:border-dark-border bg-slate-50/50 dark:bg-slate-900/30 mt-auto">
+                <div className="p-6 border-t border-light-border dark:border-dark-border bg-primary/5 dark:bg-primary/10 mt-auto">
                   <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="p-2.5 rounded-lg border border-light-border dark:border-dark-border bg-white dark:bg-dark-card flex flex-col justify-center">
+                    <div className="p-2.5 rounded-lg border border-light-border dark:border-dark-border glass-card flex flex-col justify-center">
                       <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase">
                         Standard Fee
                       </span>

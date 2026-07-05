@@ -50,11 +50,12 @@ export default function Hero({ onOpenBrochure }: { onOpenBrochure: () => void })
   return (
     <section 
       id="hero" 
-      className="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden bento-grid-pattern noise-bg bg-light-bg dark:bg-dark-bg transition-colors duration-300"
+      className="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden grid-bg noise-bg bg-light-bg dark:bg-dark-bg transition-colors duration-300"
     >
-      {/* Decorative Gradients */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 dark:bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-secondary/5 dark:bg-amber-500/5 rounded-full blur-[80px] pointer-events-none" />
+      {/* Ambient Auroras */}
+      <div className="aurora-glow top-10 left-1/4 w-[500px] h-[500px] bg-primary/25" />
+      <div className="aurora-glow bottom-20 right-1/4 w-[450px] h-[450px] bg-accent/30" />
+      <div className="aurora-glow top-1/3 right-10 w-[300px] h-[300px] bg-secondary/20" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         {/* Slogan */}
@@ -76,7 +77,7 @@ export default function Hero({ onOpenBrochure }: { onOpenBrochure: () => void })
             <span>Learn Today. Lead Tomorrow.</span>
           </div>
         </motion.div>
-
+ 
         {/* Hero Copy */}
         <div className="text-center max-w-4xl mx-auto mb-16">
           <motion.h1 
@@ -86,7 +87,7 @@ export default function Hero({ onOpenBrochure }: { onOpenBrochure: () => void })
             className="font-display font-black text-4xl sm:text-5xl lg:text-7xl tracking-tight leading-[1.05] mb-6"
           >
             Become Job-Ready in <br />
-            <span className="text-gradient">Accounting & Finance</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-indigo-500 to-accent dark:from-blue-400 dark:via-indigo-400 dark:to-cyan-400">Accounting & Finance</span>
           </motion.h1>
 
           <motion.p 

@@ -3,28 +3,28 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-primary: #0F4C81;
-  --color-primary-light: #2563EB;
-  --color-primary-dark: #1E3A8A;
+  --color-primary: #4F46E5;
+  --color-primary-light: #6366F1;
+  --color-primary-dark: #3730A3;
   
   --color-secondary: #F59E0B;
   --color-secondary-light: #FBBF24;
   --color-secondary-dark: #D97706;
   
-  --color-accent: #10B981;
-  --color-accent-light: #34D399;
-  --color-accent-dark: #059669;
+  --color-accent: #06B6D4;
+  --color-accent-light: #22D3EE;
+  --color-accent-dark: #0891B2;
 
-  --color-dark-bg: #090B0F;
-  --color-dark-card: #121620;
-  --color-dark-border: #1F2937;
+  --color-dark-bg: #030712;
+  --color-dark-card: #0A0E1A;
+  --color-dark-border: #1F293D;
   
-  --color-light-bg: #FCFDFE;
+  --color-light-bg: #F8FAFC;
   --color-light-card: #FFFFFF;
-  --color-light-border: #E5E7EB;
+  --color-light-border: #E2E8F0;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui;
-  --font-display: var(--font-plus-jakarta), ui-sans-serif, system-ui;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui;
   
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
@@ -36,17 +36,17 @@
 }
 
 :root {
-  --background: #FCFDFE;
+  --background: #F8FAFC;
   --foreground: #0F172A;
   --border-color: #E2E8F0;
   --card-bg: #FFFFFF;
 }
 
 :root.dark {
-  --background: #090B0F;
+  --background: #030712;
   --foreground: #F8FAFC;
-  --border-color: #1F2937;
-  --card-bg: #121620;
+  --border-color: #1F293D;
+  --card-bg: #0A0E1A;
 }
 
 body {
@@ -56,6 +56,44 @@ body {
   scroll-behavior: smooth;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Premium layout grid overlay */
+.grid-bg {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+}
+.dark .grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+}
+
+/* Glassmorphism float cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+.dark .glass-card {
+  background: rgba(10, 14, 26, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(31, 41, 61, 0.5);
+}
+
+/* Ambient glows */
+.aurora-glow {
+  position: absolute;
+  filter: blur(140px);
+  opacity: 0.12;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.dark .aurora-glow {
+  opacity: 0.2;
 }
 
 /* Premium noise texture */

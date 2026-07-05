@@ -101,13 +101,13 @@ export default function WhyChooseUs() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: idx * 0.05 }}
               whileHover={{ y: -4, transition: { duration: 0.15 } }}
-              className={`p-6 rounded-2xl bg-white dark:bg-dark-card border border-light-border dark:border-dark-border shadow-sm flex flex-col group relative overflow-hidden ${reason.cols}`}
+              className={`p-6 rounded-2xl glass-card shadow-lg hover:shadow-xl flex flex-col group relative overflow-hidden transition-all duration-300 ${reason.cols}`}
             >
               {/* Highlight Gradient Overlay on Hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${reason.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
               
               <div className="relative z-10">
-                <div className="p-3 w-fit rounded-xl bg-slate-50 dark:bg-slate-900 border border-light-border dark:border-dark-border text-primary dark:text-blue-400 group-hover:scale-105 transition-transform duration-300 mb-4">
+                <div className="p-3 w-fit rounded-xl bg-primary/5 dark:bg-primary/15 border border-primary/10 dark:border-primary/25 text-primary dark:text-blue-400 group-hover:scale-105 transition-transform duration-300 mb-4">
                   <reason.icon className="w-5 h-5" />
                 </div>
                 <h3 className="font-display font-bold text-lg text-slate-800 dark:text-white mb-2">

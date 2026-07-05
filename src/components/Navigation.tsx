@@ -31,7 +31,7 @@ export default function Navigation() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-light-bg/90 dark:bg-dark-bg/90 backdrop-blur-md border-b border-light-border dark:border-dark-border py-3 shadow-sm'
+          ? 'bg-light-bg/85 dark:bg-dark-bg/75 backdrop-blur-md border-b border-light-border/80 dark:border-dark-border/80 py-3 shadow-md'
           : 'bg-transparent py-5'
       }`}
     >
@@ -49,7 +49,7 @@ export default function Navigation() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold tracking-tight text-lg text-primary dark:text-blue-400">
+              <span className="font-display font-black tracking-tight text-lg text-slate-800 dark:text-white group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
                 SKV EDUCATION
               </span>
               <span className="text-[10px] tracking-widest font-semibold uppercase text-secondary-dark dark:text-secondary opacity-90">
