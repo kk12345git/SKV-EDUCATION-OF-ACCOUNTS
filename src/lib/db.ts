@@ -16,31 +16,81 @@ export interface Lead {
 
 const dbPath = path.join(process.cwd(), 'data', 'leads.json');
 
-// In-memory array fallback (important for Vercel/serverless where filesystem is read-only)
+// Vercel KV credentials (injected automatically when Vercel KV is connected in dashboard)
+const KV_URL = process.env.KV_REST_API_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN;
+
+// In-memory array fallback
 const globalRef = global as any;
 if (!globalRef.inMemoryLeads) {
   globalRef.inMemoryLeads = [];
 }
 
-export async function getLeads(): Promise<Lead[]> {
-  let fileLeads: Lead[] = [];
+async function fetchVercelKV(): Promise<Lead[]> {
+  if (!KV_URL || !KV_TOKEN) return [];
   try {
-    const fileContent = await fs.readFile(dbPath, 'utf-8');
-    if (fileContent.trim()) {
-      fileLeads = JSON.parse(fileContent) as Lead[];
+    const res = await fetch(`${KV_URL}/get/leads`, {
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`,
+      },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.result) {
+        return JSON.parse(data.result) as Lead[];
+      }
     }
-  } catch (error: any) {
-    // Ignore read errors (ENOENT, etc.)
+  } catch (err) {
+    console.error('Vercel KV read failed:', err);
+  }
+  return [];
+}
+
+async function saveVercelKV(leads: Lead[]): Promise<boolean> {
+  if (!KV_URL || !KV_TOKEN) return false;
+  try {
+    const res = await fetch(KV_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(['SET', 'leads', JSON.stringify(leads)]),
+    });
+    return res.ok;
+  } catch (err) {
+    console.error('Vercel KV write failed:', err);
+    return false;
+  }
+}
+
+export async function getLeads(): Promise<Lead[]> {
+  let leads: Lead[] = [];
+
+  // 1. Try Vercel KV first
+  if (KV_URL && KV_TOKEN) {
+    leads = await fetchVercelKV();
+  } else {
+    // 2. Fall back to local file system
+    try {
+      const fileContent = await fs.readFile(dbPath, 'utf-8');
+      if (fileContent.trim()) {
+        leads = JSON.parse(fileContent) as Lead[];
+      }
+    } catch (error) {
+      // Ignore
+    }
   }
 
-  const combined = [...fileLeads];
+  // 3. Merge in-memory leads (backup)
   const inMemory = globalRef.inMemoryLeads as Lead[];
   for (const lead of inMemory) {
-    if (!combined.some(l => l.id === lead.id)) {
-      combined.push(lead);
+    if (!leads.some(l => l.id === lead.id)) {
+      leads.push(lead);
     }
   }
-  return combined;
+
+  return leads.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export async function saveLead(newLead: Omit<Lead, 'id' | 'date'>): Promise<Lead> {
@@ -53,6 +103,7 @@ export async function saveLead(newLead: Omit<Lead, 'id' | 'date'>): Promise<Lead
   const inMemory = globalRef.inMemoryLeads as Lead[];
   inMemory.push(lead);
 
+  // 1. Save to local file system
   try {
     const dirPath = path.dirname(dbPath);
     await fs.mkdir(dirPath, { recursive: true });
@@ -70,7 +121,18 @@ export async function saveLead(newLead: Omit<Lead, 'id' | 'date'>): Promise<Lead
     currentFileLeads.push(lead);
     await fs.writeFile(dbPath, JSON.stringify(currentFileLeads, null, 2), 'utf-8');
   } catch (error) {
-    console.warn('Database filesystem save skipped (expected on Vercel serverless):', error);
+    // Ignore write errors (expected on Vercel serverless)
+  }
+
+  // 2. Save to Vercel KV if connected
+  if (KV_URL && KV_TOKEN) {
+    try {
+      const currentLeads = await fetchVercelKV();
+      currentLeads.push(lead);
+      await saveVercelKV(currentLeads);
+    } catch (error) {
+      console.error('Failed to sync to Vercel KV:', error);
+    }
   }
 
   return lead;
