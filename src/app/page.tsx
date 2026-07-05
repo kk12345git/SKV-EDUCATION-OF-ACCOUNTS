@@ -181,10 +181,10 @@ export default function Home() {
 
                   <div className="p-6 border-t border-light-border dark:border-dark-border mt-auto">
                     <Link
-                      href="/courses"
+                      href={`/enroll?course=${encodeURIComponent(course.name)}`}
                       className="w-full py-3 rounded-xl bg-slate-50 border border-light-border text-slate-800 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-850 text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-1"
                     >
-                      <span>Learn More</span>
+                      <span>Enroll / Register</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>

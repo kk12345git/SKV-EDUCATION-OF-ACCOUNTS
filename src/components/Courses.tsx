@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Clock, Award, CheckCircle, TrendingUp, Sparkles, AlertCircle } from 'lucide-react';
 
@@ -139,6 +140,7 @@ const coursesData: Course[] = [
 ];
 
 export default function Courses() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<'all' | 'accounting' | 'taxation' | 'essentials'>('all');
 
   const filteredCourses = coursesData.filter(course => {
@@ -147,26 +149,7 @@ export default function Courses() {
   });
 
   const handleEnrollClick = (courseName: string) => {
-    const courseSelect = document.getElementById('demo-course') as HTMLSelectElement;
-    if (courseSelect) {
-      courseSelect.value = courseName;
-      // Trigger a change event so the select state updates if it uses react state
-      const event = new Event('change', { bubbles: true });
-      courseSelect.dispatchEvent(event);
-    }
-    const element = document.getElementById('demo-form');
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+    router.push(`/enroll?course=${encodeURIComponent(courseName)}`);
   };
 
   return (

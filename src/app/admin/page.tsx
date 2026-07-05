@@ -13,6 +13,8 @@ interface Lead {
   email?: string;
   course?: string;
   timing?: string;
+  qualification?: string;
+  purpose?: string;
   date: string;
 }
 
@@ -114,8 +116,7 @@ export default function AdminDashboard() {
   const handleExportCSV = () => {
     if (filteredLeads.length === 0) return;
 
-    // Build CSV Content
-    const headers = ['Date', 'Type', 'Name', 'Phone', 'Email', 'Course', 'Timing'];
+    const headers = ['Date', 'Type', 'Name', 'Phone', 'Email', 'Course', 'Timing', 'Qualification', 'Purpose'];
     const rows = filteredLeads.map((lead) => [
       new Date(lead.date).toLocaleDateString('en-IN') + ' ' + new Date(lead.date).toLocaleTimeString('en-IN'),
       lead.type,
@@ -124,6 +125,8 @@ export default function AdminDashboard() {
       lead.email || '',
       lead.course || '',
       lead.timing || '',
+      lead.qualification || '',
+      lead.purpose || '',
     ]);
 
     const csvContent =
@@ -328,12 +331,14 @@ export default function AdminDashboard() {
                       <th className="py-4 px-6">Email Address</th>
                       <th className="py-4 px-6">Course Interested</th>
                       <th className="py-4 px-6">Preferred Slot</th>
+                      <th className="py-4 px-6">Qualification</th>
+                      <th className="py-4 px-6">Purpose</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-light-border dark:divide-dark-border text-xs">
                     {filteredLeads.length === 0 ? (
                       <tr>
-                        <td colSpan={7} className="py-12 text-center text-slate-400">
+                        <td colSpan={9} className="py-12 text-center text-slate-400">
                           {loading ? 'Refreshing leads list...' : 'No student leads found matching your criteria.'}
                         </td>
                       </tr>
@@ -380,6 +385,12 @@ export default function AdminDashboard() {
                           </td>
                           <td className="py-4 px-6 text-slate-500 dark:text-slate-400">
                             {lead.timing || <span className="text-slate-300 dark:text-slate-700">—</span>}
+                          </td>
+                          <td className="py-4 px-6 text-slate-550 dark:text-slate-350 font-medium">
+                            {lead.qualification || <span className="text-slate-300 dark:text-slate-700">—</span>}
+                          </td>
+                          <td className="py-4 px-6 text-slate-500 dark:text-slate-400">
+                            {lead.purpose || <span className="text-slate-300 dark:text-slate-700">—</span>}
                           </td>
                         </tr>
                       ))

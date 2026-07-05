@@ -4,7 +4,7 @@ import { getLeads, saveLead } from '@/lib/db';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, name, phone, email, course, timing } = body;
+    const { type, name, phone, email, course, timing, qualification, purpose } = body;
 
     if (!name || !phone || !type) {
       return NextResponse.json(
@@ -19,7 +19,9 @@ export async function POST(request: Request) {
       phone,
       email: email || '',
       course: course || '',
-      timing: timing || ''
+      timing: timing || '',
+      qualification: qualification || '',
+      purpose: purpose || ''
     });
 
     return NextResponse.json({ success: true, lead });

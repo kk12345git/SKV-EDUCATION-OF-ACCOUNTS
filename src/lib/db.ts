@@ -9,6 +9,8 @@ export interface Lead {
   email?: string;
   course?: string;
   timing?: string;
+  qualification?: string;
+  purpose?: string;
   date: string;
 }
 
