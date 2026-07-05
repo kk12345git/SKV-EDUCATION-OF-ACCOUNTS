@@ -20,6 +20,7 @@ interface Lead {
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
   const [adminKey, setAdminKey] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -101,8 +102,13 @@ export default function AdminDashboard() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!adminKey.trim()) return;
-    fetchLeads();
+    if (!username.trim() || !adminKey.trim()) return;
+    
+    if (username === 'SKVFOUND' && adminKey === 'skvadmin2026@') {
+      fetchLeads();
+    } else {
+      setErrorMsg('Invalid username or password credentials.');
+    }
   };
 
   const handleLogout = () => {
@@ -110,6 +116,7 @@ export default function AdminDashboard() {
     sessionStorage.removeItem('skv_admin_key');
     setIsAuthenticated(false);
     setLeads([]);
+    setUsername('');
     setAdminKey('');
   };
 
@@ -177,8 +184,23 @@ export default function AdminDashboard() {
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
+                <label htmlFor="admin-username" className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  id="admin-username"
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter username"
+                  className="w-full px-4 py-3 rounded-xl border border-light-border dark:border-dark-border bg-slate-50/50 dark:bg-slate-900/30 text-sm focus:outline-none focus:border-primary mb-1"
+                />
+              </div>
+
+              <div>
                 <label htmlFor="admin-key" className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1">
-                  Access Key
+                  Password
                 </label>
                 <input
                   type="password"
@@ -186,7 +208,7 @@ export default function AdminDashboard() {
                   required
                   value={adminKey}
                   onChange={(e) => setAdminKey(e.target.value)}
-                  placeholder="Enter access key"
+                  placeholder="Enter password"
                   className="w-full px-4 py-3 rounded-xl border border-light-border dark:border-dark-border bg-slate-50/50 dark:bg-slate-900/30 text-sm focus:outline-none focus:border-primary"
                 />
               </div>

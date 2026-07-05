@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Lock } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -126,8 +126,11 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] gap-2">
-          <span>
+          <span className="flex items-center gap-1.5">
             &copy; {new Date().getFullYear()} SKV Education of Accounts. All Rights Reserved.
+            <Link href="/admin" className="p-1 rounded-md text-slate-500 hover:text-slate-350 hover:bg-slate-800/30 transition-all" title="Admin Registry Portal">
+              <Lock className="w-3 h-3" />
+            </Link>
           </span>
           <div className="flex items-center space-x-1">
             <span>Learn Today. Lead Tomorrow.</span>

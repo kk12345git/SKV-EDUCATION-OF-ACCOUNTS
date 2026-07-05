@@ -37,7 +37,7 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const authHeader = request.headers.get('x-admin-key');
-    if (authHeader !== 'skvadmin2026') {
+    if (authHeader !== 'skvadmin2026@' && authHeader !== 'skvadmin2026') {
       return NextResponse.json(
         { error: 'Unauthorized access key' },
         { status: 401 }
