@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Play, ArrowRight, Download, Phone, Calendar, Users, Award, BookOpen, Clock } from 'lucide-react';
 
 const stats = [
@@ -104,13 +105,13 @@ export default function Hero({ onOpenBrochure }: { onOpenBrochure: () => void })
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
           >
-            <button
-              onClick={handleDemoClick}
+            <Link
+              href="/enroll"
               className="w-full sm:w-auto flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-primary hover:bg-primary-light text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 dark:bg-blue-600 dark:hover:bg-blue-500"
             >
               <Calendar className="w-4 h-4" />
               <span>Book Free Demo Class</span>
-            </button>
+            </Link>
 
             <button
               onClick={onOpenBrochure}

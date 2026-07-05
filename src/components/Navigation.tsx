@@ -143,7 +143,7 @@ export default function Navigation() {
             </a>
 
             <Link
-              href="/contact"
+              href="/enroll"
               className="flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-primary-light text-white text-xs font-bold shadow-sm shadow-blue-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 dark:bg-blue-600 dark:hover:bg-blue-500"
             >
               <Calendar className="w-3.5 h-3.5" />
@@ -241,7 +241,7 @@ export default function Navigation() {
               <span>WhatsApp</span>
             </a>
             <Link
-              href="/contact"
+              href="/enroll"
               onClick={() => setIsOpen(false)}
               className="col-span-2 flex items-center justify-center space-x-2 py-3 rounded-lg bg-primary hover:bg-primary-light text-white text-sm font-bold shadow-md shadow-blue-500/10"
             >
