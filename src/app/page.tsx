@@ -61,32 +61,40 @@ export default function Home() {
   const [brochureEmail, setBrochureEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleBrochureSubmit = (e: React.FormEvent) => {
+  const handleBrochureSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!brochureName || !brochurePhone || !brochureEmail) return;
 
     setLoading(true);
-    setTimeout(() => {
-      const leads = JSON.parse(localStorage.getItem('skv_leads') || '[]');
-      leads.push({
-        type: 'brochure_popup_download',
-        name: brochureName,
-        phone: brochurePhone,
-        email: brochureEmail,
-        date: new Date().toISOString()
-      });
-      localStorage.setItem('skv_leads', JSON.stringify(leads));
-
-      confetti({
-        particleCount: 120,
-        spread: 70,
-        origin: { y: 0.6 }
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'brochure_popup_download',
+          name: brochureName,
+          phone: brochurePhone,
+          email: brochureEmail
+        })
       });
 
+      if (response.ok) {
+        confetti({
+          particleCount: 120,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+        router.push(`/thank-you?type=guide&name=${encodeURIComponent(brochureName)}`);
+        setShowBrochureModal(false);
+        setBrochureName('');
+        setBrochurePhone('');
+        setBrochureEmail('');
+      }
+    } catch (err) {
+      console.error('Failed to submit brochure request:', err);
+    } finally {
       setLoading(false);
-      setShowBrochureModal(false);
-      router.push(`/thank-you?type=guide&name=${encodeURIComponent(brochureName)}`);
-    }, 1000);
+    }
   };
 
   return (

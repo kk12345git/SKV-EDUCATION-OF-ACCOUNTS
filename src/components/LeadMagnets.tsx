@@ -31,58 +31,67 @@ export default function LeadMagnets() {
     });
   };
 
-  const handleDemoSubmit = (e: React.FormEvent) => {
+  const handleDemoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!demoName || !demoPhone) return;
 
     setDemoLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      // Store lead
-      const leads = JSON.parse(localStorage.getItem('skv_leads') || '[]');
-      leads.push({
-        type: 'demo_booking',
-        name: demoName,
-        phone: demoPhone,
-        course: demoCourse,
-        timing: demoTiming,
-        date: new Date().toISOString()
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'demo_booking',
+          name: demoName,
+          phone: demoPhone,
+          course: demoCourse,
+          timing: demoTiming
+        })
       });
-      localStorage.setItem('skv_leads', JSON.stringify(leads));
 
-      triggerConfetti();
+      if (response.ok) {
+        triggerConfetti();
+        router.push(`/thank-you?type=demo&name=${encodeURIComponent(demoName)}`);
+        setDemoName('');
+        setDemoPhone('');
+      }
+    } catch (err) {
+      console.error('Failed to submit demo booking:', err);
+    } finally {
       setDemoLoading(false);
-      
-      // Redirect
-      router.push(`/thank-you?type=demo&name=${encodeURIComponent(demoName)}`);
-    }, 1000);
+    }
   };
 
-  const handleGuideSubmit = (e: React.FormEvent) => {
+  const handleGuideSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!guideName || !guidePhone || !guideEmail) return;
 
     setGuideLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      // Store lead
-      const leads = JSON.parse(localStorage.getItem('skv_leads') || '[]');
-      leads.push({
-        type: 'guide_download',
-        name: guideName,
-        phone: guidePhone,
-        email: guideEmail,
-        course: guideCourse,
-        date: new Date().toISOString()
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'guide_download',
+          name: guideName,
+          phone: guidePhone,
+          email: guideEmail,
+          course: guideCourse
+        })
       });
-      localStorage.setItem('skv_leads', JSON.stringify(leads));
 
-      triggerConfetti();
+      if (response.ok) {
+        triggerConfetti();
+        router.push(`/thank-you?type=guide&name=${encodeURIComponent(guideName)}`);
+        setGuideName('');
+        setGuidePhone('');
+        setGuideEmail('');
+      }
+    } catch (err) {
+      console.error('Failed to submit guide download:', err);
+    } finally {
       setGuideLoading(false);
-
-      // Redirect
-      router.push(`/thank-you?type=guide&name=${encodeURIComponent(guideName)}`);
-    }, 1000);
+    }
   };
 
   return (

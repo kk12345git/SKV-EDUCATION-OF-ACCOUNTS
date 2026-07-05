@@ -135,7 +135,7 @@ export default function Hero({ onOpenBrochure }: { onOpenBrochure: () => void })
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
         >
           {stats.map((stat, idx) => (
             <motion.div

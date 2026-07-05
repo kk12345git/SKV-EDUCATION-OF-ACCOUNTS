@@ -18,31 +18,39 @@ export default function ContactPage() {
   const [timing, setTiming] = useState('Morning (9 AM - 12 PM)');
   const [loading, setLoading] = useState(false);
 
-  const handleDemoSubmit = (e: React.FormEvent) => {
+  const handleDemoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phone) return;
 
     setLoading(true);
-    setTimeout(() => {
-      const leads = JSON.parse(localStorage.getItem('skv_leads') || '[]');
-      leads.push({
-        type: 'contact_page_demo_booking',
-        name,
-        phone,
-        course,
-        timing,
-        date: new Date().toISOString()
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'contact_page_demo_booking',
+          name,
+          phone,
+          course,
+          timing
+        })
       });
-      localStorage.setItem('skv_leads', JSON.stringify(leads));
 
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 }
-      });
+      if (response.ok) {
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+        router.push(`/thank-you?type=demo&name=${encodeURIComponent(name)}`);
+        setName('');
+        setPhone('');
+      }
+    } catch (err) {
+      console.error('Failed to submit contact demo:', err);
+    } finally {
       setLoading(false);
-      router.push(`/thank-you?type=demo&name=${encodeURIComponent(name)}`);
-    }, 1000);
+    }
   };
 
   return (

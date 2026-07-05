@@ -2,70 +2,70 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Award, Briefcase, HelpCircle, GraduationCap, DollarSign, Clock, LayoutGrid, Cpu, CheckCircle } from 'lucide-react';
+import { Cpu, BookOpen, GraduationCap, Briefcase, DollarSign, Clock, LayoutGrid, Award, CheckCircle } from 'lucide-react';
 
 const reasons = [
   {
     title: 'Practical Industry Training',
     desc: 'Skip pure theory. Work directly on actual company tax filings, real invoices, and live company profiles to build genuine competence.',
     icon: Cpu,
-    cols: 'col-span-2 md:col-span-1 lg:col-span-2',
+    cols: 'col-span-1 sm:col-span-2 lg:col-span-2',
     color: 'from-blue-500/10 to-indigo-500/10'
   },
   {
     title: 'Real Company Accounts',
     desc: 'Practice on authentic business datasets, Tally files, and actual trade accounts, preparing you for real day-one responsibilities.',
     icon: BookOpen,
-    cols: 'col-span-2 md:col-span-1 lg:col-span-1',
+    cols: 'col-span-1',
     color: 'from-amber-500/10 to-orange-500/10'
   },
   {
     title: 'Expert Trainers',
     desc: 'Learn directly from seasoned tax consultants and corporate accounting professionals who know what employers expect.',
     icon: GraduationCap,
-    cols: 'col-span-2 md:col-span-1 lg:col-span-1',
+    cols: 'col-span-1',
     color: 'from-emerald-500/10 to-teal-500/10'
   },
   {
     title: 'Placement Support',
     desc: 'Receive direct interview alerts, company referrals, resume building reviews, and mock interview preparations to secure your job.',
     icon: Briefcase,
-    cols: 'col-span-2 md:col-span-1 lg:col-span-2',
+    cols: 'col-span-1 sm:col-span-2 lg:col-span-2',
     color: 'from-violet-500/10 to-purple-500/10'
   },
   {
     title: 'Affordable Fees',
     desc: 'Get standard corporate-level training at half the market rates. Exclusive student pricing models starting at ₹2,999.',
     icon: DollarSign,
-    cols: 'col-span-2 md:col-span-1 lg:col-span-1',
+    cols: 'col-span-1',
     color: 'from-pink-500/10 to-rose-500/10'
   },
   {
     title: 'Flexible Timings',
     desc: 'Choose from multiple hourly slots between 9:00 AM – 12:00 PM and 4:00 PM – 9:00 PM, perfect for college students and working professionals.',
     icon: Clock,
-    cols: 'col-span-2 md:col-span-1 lg:col-span-1',
+    cols: 'col-span-1',
     color: 'from-cyan-500/10 to-sky-500/10'
   },
   {
     title: 'Live Practice Lab',
     desc: 'Unrestricted hands-on computer system access during your course timing. No slides—just pure system training and direct teacher support.',
     icon: LayoutGrid,
-    cols: 'col-span-2 md:col-span-2 lg:col-span-2',
+    cols: 'col-span-1 sm:col-span-2 lg:col-span-2',
     color: 'from-indigo-500/10 to-sky-500/10'
   },
   {
     title: 'Course Certification',
-    desc: 'Receive a recognized course completion certificate that validating your professional accounting capabilities to corporate recruiters.',
+    desc: 'Receive a recognized course completion certificate validating your professional accounting capabilities to corporate recruiters.',
     icon: Award,
-    cols: 'col-span-2 md:col-span-1 lg:col-span-1',
+    cols: 'col-span-1',
     color: 'from-green-500/10 to-emerald-500/10'
   },
   {
     title: 'Interview Support',
     desc: 'Regular mock Q&A training, resume building sessions, and personality training to build confidence for your job applications.',
     icon: CheckCircle,
-    cols: 'col-span-2 md:col-span-1 lg:col-span-1',
+    cols: 'col-span-1',
     color: 'from-fuchsia-500/10 to-purple-500/10'
   }
 ];
@@ -92,7 +92,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
           {reasons.map((reason, idx) => (
             <motion.div
               key={idx}

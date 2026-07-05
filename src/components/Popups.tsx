@@ -68,42 +68,58 @@ export default function Popups() {
     });
   };
 
-  const handleExitSubmit = (e: React.FormEvent) => {
+  const handleExitSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!exitName || !exitPhone) return;
 
-    // Store lead details
-    const leads = JSON.parse(localStorage.getItem('skv_leads') || '[]');
-    leads.push({
-      type: 'exit_intent_discount',
-      name: exitName,
-      phone: exitPhone,
-      date: new Date().toISOString()
-    });
-    localStorage.setItem('skv_leads', JSON.stringify(leads));
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'exit_intent_discount',
+          name: exitName,
+          phone: exitPhone
+        })
+      });
 
-    triggerConfetti();
-    setShowExitIntent(false);
-    router.push(`/thank-you?type=discount&name=${encodeURIComponent(exitName)}`);
+      if (response.ok) {
+        triggerConfetti();
+        setShowExitIntent(false);
+        router.push(`/thank-you?type=discount&name=${encodeURIComponent(exitName)}`);
+        setExitName('');
+        setExitPhone('');
+      }
+    } catch (err) {
+      console.error('Failed to submit exit lead:', err);
+    }
   };
 
-  const handleDelayedDemoSubmit = (e: React.FormEvent) => {
+  const handleDelayedDemoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!demoName || !demoPhone) return;
 
-    // Store lead details
-    const leads = JSON.parse(localStorage.getItem('skv_leads') || '[]');
-    leads.push({
-      type: 'delayed_popup_demo',
-      name: demoName,
-      phone: demoPhone,
-      date: new Date().toISOString()
-    });
-    localStorage.setItem('skv_leads', JSON.stringify(leads));
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'delayed_popup_demo',
+          name: demoName,
+          phone: demoPhone
+        })
+      });
 
-    triggerConfetti();
-    setShowDelayedDemo(false);
-    router.push(`/thank-you?type=demo&name=${encodeURIComponent(demoName)}`);
+      if (response.ok) {
+        triggerConfetti();
+        setShowDelayedDemo(false);
+        router.push(`/thank-you?type=demo&name=${encodeURIComponent(demoName)}`);
+        setDemoName('');
+        setDemoPhone('');
+      }
+    } catch (err) {
+      console.error('Failed to submit delayed demo lead:', err);
+    }
   };
 
   return (
