@@ -179,7 +179,7 @@ export default function Courses() {
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-primary dark:text-blue-400 mb-3">
+          <h2 className="font-display text-sm sm:text-base font-extrabold uppercase tracking-widest text-primary dark:text-blue-400 mb-3">
             Our Syllabus
           </h2>
           <p className="font-display font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-800 dark:text-white leading-tight">
