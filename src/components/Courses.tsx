@@ -299,7 +299,7 @@ export default function Courses() {
                     <div className="p-2.5 rounded-lg border border-amber-200 dark:border-amber-900/50 bg-amber-50/20 dark:bg-amber-950/10 flex flex-col justify-center relative overflow-hidden group/college">
                       <span className="text-[9px] font-extrabold text-amber-700 dark:text-amber-400 uppercase flex items-center">
                         <Sparkles className="w-2.5 h-2.5 mr-0.5 text-amber-500 animate-pulse" />
-                        College Student
+                        Offer Price
                       </span>
                       <span className="text-base font-black text-amber-600 dark:text-amber-400">
                         ₹{course.collegeFees.toLocaleString('en-IN')}

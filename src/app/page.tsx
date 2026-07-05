@@ -165,13 +165,13 @@ export default function Home() {
 
                     <div className="grid grid-cols-2 gap-4 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-light-border dark:border-dark-border">
                       <div>
-                        <span className="text-[9px] font-bold text-slate-400 uppercase">General Fee</span>
+                        <span className="text-[9px] font-bold text-slate-400 uppercase">Standard Price</span>
                         <span className="text-xs font-black text-slate-700 dark:text-slate-300 block">
                           ₹{course.fees.toLocaleString('en-IN')}
                         </span>
                       </div>
                       <div>
-                        <span className="text-[9px] font-extrabold text-amber-600 uppercase">Student Fee</span>
+                        <span className="text-[9px] font-extrabold text-amber-600 uppercase">Offer Price</span>
                         <span className="text-xs font-black text-amber-600 dark:text-amber-400 block">
                           ₹{course.collegeFees.toLocaleString('en-IN')}
                         </span>
