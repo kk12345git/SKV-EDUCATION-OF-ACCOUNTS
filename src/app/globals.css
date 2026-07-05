@@ -36,38 +36,18 @@
 }
 
 :root {
-  --background: #0A192F; /* Premium Midnight Navy */
-  --foreground: #F8FAFC;
-  --border-color: rgba(100, 116, 139, 0.25);
-  --card-bg: #112240;    /* Dark Navy Card */
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --border-color: #E2E8F0;
+  --card-bg: #FFFFFF;
 }
 
 :root.dark {
-  --background: #030712; /* Premium Space Black */
+  --background: #030712;
   --foreground: #F8FAFC;
   --border-color: #1F293D;
   --card-bg: #0A0E1A;
 }
-
-/* Fallback overrides when dark mode class is not present, to ensure high readability on Navy Blue */
-:root:not(.dark) body {
-  background-color: #0A192F;
-  color: #F8FAFC;
-}
-:root:not(.dark) .text-slate-800 { color: #F8FAFC !important; }
-:root:not(.dark) .text-slate-700 { color: #E2E8F0 !important; }
-:root:not(.dark) .text-slate-600 { color: #CBD5E1 !important; }
-:root:not(.dark) .text-slate-500 { color: #94A3B8 !important; }
-:root:not(.dark) .text-slate-900 { color: #FFFFFF !important; }
-:root:not(.dark) .text-slate-400 { color: #94A3B8 !important; }
-:root:not(.dark) .text-slate-300 { color: #E2E8F0 !important; }
-:root:not(.dark) .bg-white { background-color: #112240 !important; }
-:root:not(.dark) .bg-slate-50 { background-color: #0D1E36 !important; }
-:root:not(.dark) .bg-slate-100 { background-color: #172A45 !important; }
-:root:not(.dark) .bg-slate-50\/50 { background-color: rgba(23, 42, 69, 0.5) !important; }
-:root:not(.dark) .border-light-border { border-color: rgba(100, 116, 139, 0.25) !important; }
-:root:not(.dark) .border-slate-200 { border-color: rgba(100, 116, 139, 0.25) !important; }
-:root:not(.dark) .border-slate-100 { border-color: rgba(100, 116, 139, 0.15) !important; }
 
 body {
   background-color: var(--background);
