@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Play, ArrowRight, Download, Phone, Calendar, Users, Award, BookOpen, Clock } from 'lucide-react';
 
@@ -62,7 +63,15 @@ export default function Hero({ onOpenBrochure }: { onOpenBrochure: () => void })
           transition={{ duration: 0.5 }}
           className="flex justify-center mb-6"
         >
-          <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-primary/20 dark:border-blue-500/30 bg-primary/5 dark:bg-blue-500/5 text-xs font-semibold text-primary dark:text-blue-400 tracking-wider uppercase">
+          <div className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full border border-primary/20 dark:border-blue-500/30 bg-primary/5 dark:bg-blue-500/5 text-xs font-semibold text-primary dark:text-blue-400 tracking-wider uppercase">
+            <div className="relative w-4 h-4 overflow-hidden rounded-md bg-white border border-primary/10 p-0.5">
+              <Image
+                src="/SKV LOGO.jpeg"
+                alt="SKV Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
             <span>Learn Today. Lead Tomorrow.</span>
           </div>
         </motion.div>

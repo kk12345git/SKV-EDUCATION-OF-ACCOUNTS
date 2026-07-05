@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowLeft, MessageCircle, Download, FileText } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -56,6 +57,18 @@ function ThankYouContent() {
         {/* Top visual strip */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary via-blue-500 to-accent" />
         
+        {/* Logo Branding */}
+        <div className="flex justify-center mb-6">
+          <div className="relative w-12 h-12 overflow-hidden rounded-xl bg-white border border-light-border dark:border-slate-800 p-1">
+            <Image
+              src="/SKV LOGO.jpeg"
+              alt="SKV Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
+        </div>
+
         {/* Check Circle */}
         <div className="mx-auto w-16 h-16 rounded-2xl bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900 text-green-600 dark:text-green-400 flex items-center justify-center mb-6">
           <CheckCircle className="w-8 h-8" />
