@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from './ThemeProvider';
-import { Sun, Moon, Menu, X, Phone, MessageCircle, Calendar } from 'lucide-react';
+import { Sun, Moon, Menu, X, Phone, MessageCircle, Calendar, Lock } from 'lucide-react';
 
 export default function Navigation() {
   const { theme, toggleTheme } = useTheme();
@@ -104,6 +104,16 @@ export default function Navigation() {
 
           {/* Desktop Right CTAs */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Admin Portal Shortcut */}
+            <Link
+              href="/admin"
+              className="p-2 rounded-lg border border-light-border dark:border-dark-border text-slate-400 hover:text-primary dark:text-slate-500 dark:hover:text-blue-400 transition-all hover:bg-slate-50 dark:hover:bg-slate-900"
+              aria-label="Admin Portal"
+              title="Admissions Admin Portal"
+            >
+              <Lock className="w-5 h-5" />
+            </Link>
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -143,6 +153,14 @@ export default function Navigation() {
 
           {/* Mobile Right Menu & Theme Toggle */}
           <div className="flex md:hidden items-center space-x-3">
+            <Link
+              href="/admin"
+              className="p-1.5 rounded-lg border border-light-border dark:border-dark-border text-slate-400 dark:text-slate-500"
+              aria-label="Admin Portal"
+              title="Admissions Admin Portal"
+            >
+              <Lock className="w-4 h-4" />
+            </Link>
             <button
               onClick={toggleTheme}
               className="p-1.5 rounded-lg border border-light-border dark:border-dark-border text-slate-600 dark:text-slate-300"
