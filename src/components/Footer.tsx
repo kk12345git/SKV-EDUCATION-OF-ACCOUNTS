@@ -2,26 +2,10 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 export default function Footer() {
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 noise-bg pt-16 pb-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,19 +59,17 @@ export default function Footer() {
               Navigation
             </h4>
             <div className="flex flex-col space-y-2 text-xs">
-              <a href="#courses" onClick={(e) => handleScrollTo(e, 'courses')} className="hover:text-white transition-colors">Courses Offered</a>
-              <a href="#why-choose-us" onClick={(e) => handleScrollTo(e, 'why-choose-us')} className="hover:text-white transition-colors">Why Choose Us</a>
-              <a href="#career-growth" onClick={(e) => handleScrollTo(e, 'career-growth')} className="hover:text-white transition-colors">Career Timeline</a>
-              <a href="#journey" onClick={(e) => handleScrollTo(e, 'journey')} className="hover:text-white transition-colors">Our Journey</a>
-              <a href="#testimonials" onClick={(e) => handleScrollTo(e, 'testimonials')} className="hover:text-white transition-colors">Student Reviews</a>
-              <a href="#faq" onClick={(e) => handleScrollTo(e, 'faq')} className="hover:text-white transition-colors">FAQs</a>
+              <Link href="/courses" className="hover:text-white transition-colors">Courses Offered</Link>
+              <Link href="/why-choose-us" className="hover:text-white transition-colors">Why Choose Us</Link>
+              <Link href="/career" className="hover:text-white transition-colors">Career Timeline</Link>
+              <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
             </div>
           </div>
 
           {/* Contact Details - Col 3 */}
           <div className="lg:col-span-3 flex flex-col space-y-4">
             <h4 className="text-xs font-bold text-white uppercase tracking-widest">
-              Contact Us
+              Contact Details
             </h4>
             <div className="flex flex-col space-y-3.5 text-xs">
               <div className="flex items-start space-x-2">
@@ -124,10 +106,10 @@ export default function Footer() {
               Location Map
             </h4>
             <div className="relative rounded-xl overflow-hidden border border-slate-700 h-[140px] w-full">
-              {/* Google Maps embed iframe targeting Perambur, Chennai */}
+              {/* Working Google Maps Embed */}
               <iframe
                 title="SKV Location Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3885.6425488151833!2d80.2355523!3d13.1118356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52643a6f44d57b%3A0xe1db060c41031d27!2sPatel%20Rd%2C%20Perambur%2C%20Chennai%2C%20Tamil%20Nadu%20600011!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                src="https://maps.google.com/maps?q=11/2%20(5/2/A)%20Patel%20Road,%20Perambur,%20Chennai%20-%20600011&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

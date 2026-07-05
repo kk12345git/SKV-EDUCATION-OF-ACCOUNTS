@@ -3,22 +3,55 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 import confetti from 'canvas-confetti';
-import { X, Download } from 'lucide-react';
+import { X, Download, ArrowRight, Clock, Award, BookOpen, CheckCircle, TrendingUp } from 'lucide-react';
 
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import WhyChooseUs from '@/components/WhyChooseUs';
-import Courses from '@/components/Courses';
-import CareerGrowth from '@/components/CareerGrowth';
-import LearningJourney from '@/components/LearningJourney';
 import Testimonials from '@/components/Testimonials';
-import PlacementSupport from '@/components/PlacementSupport';
-import LeadMagnets from '@/components/LeadMagnets';
-import AICourseAdvisor from '@/components/AICourseAdvisor';
-import FAQs from '@/components/FAQs';
 import Footer from '@/components/Footer';
+import AICourseAdvisor from '@/components/AICourseAdvisor';
 import Popups from '@/components/Popups';
+
+// Top 3 featured courses for home page preview
+const featuredCourses = [
+  {
+    name: 'Tally Prime with GST',
+    category: 'Accounting',
+    fees: 14999,
+    collegeFees: 6999,
+    duration: '2 Months (Daily slots)',
+    eligibility: '12th Pass / Graduate / B.Com',
+    avgSalary: '₹2.5L - ₹4.5L/year',
+    skills: ['Tally Prime Ledger', 'Voucher Entry', 'GST Invoicing', 'Bank Reconciliation'],
+    desc: 'Complete ledger accounting and inventory control software training, synced with modern GST rules.'
+  },
+  {
+    name: 'GST (Goods & Services Tax)',
+    category: 'Taxation',
+    fees: 14999,
+    collegeFees: 6999,
+    duration: '1.5 Months',
+    eligibility: 'Graduates / Accountants / Owners',
+    avgSalary: '₹3.0L - ₹5.5L/year',
+    skills: ['GSTR-1 & 3B filings', 'ITC Reconciliation', 'GST Online returns'],
+    desc: 'End-to-end practical GST coursework covering online registration, monthly return filings, and credits.'
+  },
+  {
+    name: 'SAP (FICO / MM / HR)',
+    category: 'Accounting',
+    fees: 34999,
+    collegeFees: 29999,
+    duration: '3.5 Months',
+    eligibility: 'B.Com / M.Com / MBA Finance',
+    avgSalary: '₹4.5L - ₹9.0L/year',
+    skills: ['GL configurations', 'AP & AR accounts', 'Asset postings'],
+    desc: 'Professional ERP training covering SAP Financial Accounting (FI) and Controlling (CO) transactions.'
+  }
+];
 
 export default function Home() {
   const router = useRouter();
@@ -34,7 +67,6 @@ export default function Home() {
 
     setLoading(true);
     setTimeout(() => {
-      // Store lead details
       const leads = JSON.parse(localStorage.getItem('skv_leads') || '[]');
       leads.push({
         type: 'brochure_popup_download',
@@ -45,7 +77,6 @@ export default function Home() {
       });
       localStorage.setItem('skv_leads', JSON.stringify(leads));
 
-      // Trigger Confetti
       confetti({
         particleCount: 120,
         spread: 70,
@@ -69,34 +100,111 @@ export default function Home() {
         {/* Why Choose Us */}
         <WhyChooseUs />
 
-        {/* Courses Section */}
-        <Courses />
+        {/* Home Page Featured Courses Preview */}
+        <section className="py-24 bg-slate-50 dark:bg-[#0D111A] border-t border-light-border dark:border-dark-border transition-colors duration-300 noise-bg">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-primary dark:text-blue-400 mb-3">
+                Featured Programs
+              </h2>
+              <p className="font-display font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-800 dark:text-white leading-tight">
+                Our Most Popular Accounting Courses
+              </p>
+              <div className="mt-4 h-1 w-12 bg-primary dark:bg-blue-500 mx-auto rounded-full" />
+            </div>
 
-        {/* Career Growth Timeline */}
-        <CareerGrowth />
+            {/* Courses Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+              {featuredCourses.map((course, idx) => (
+                <div 
+                  key={idx}
+                  className="rounded-2xl border border-light-border dark:border-dark-border bg-white dark:bg-dark-card shadow-sm flex flex-col justify-between overflow-hidden group hover:shadow-md transition-all duration-300"
+                >
+                  <div className="p-6 pb-4 border-b border-light-border dark:border-dark-border bg-slate-50/50 dark:bg-slate-900/30">
+                    <div className="flex items-start justify-between mb-2">
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-2.5 py-1 rounded-md">
+                        {course.category}
+                      </span>
+                      <div className="flex items-center space-x-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>{course.duration}</span>
+                      </div>
+                    </div>
+                    <h3 className="font-display font-black text-xl text-slate-800 dark:text-white group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
+                      {course.name}
+                    </h3>
+                  </div>
 
-        {/* Learning Journey step section */}
-        <LearningJourney />
+                  <div className="p-6 flex-grow">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-5">
+                      {course.desc}
+                    </p>
+                    <div className="mb-6">
+                      <h4 className="text-[11px] font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
+                        Topics Covered
+                      </h4>
+                      <div className="grid grid-cols-2 gap-x-2 gap-y-1.5">
+                        {course.skills.map((skill, sIdx) => (
+                          <div key={sIdx} className="flex items-start space-x-1">
+                            <CheckCircle className="w-3 h-3 text-accent mt-0.5 shrink-0" />
+                            <span className="text-[11px] text-slate-600 dark:text-slate-400 truncate" title={skill}>
+                              {skill}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-light-border dark:border-dark-border">
+                      <div>
+                        <span className="text-[9px] font-bold text-slate-400 uppercase">General Fee</span>
+                        <span className="text-xs font-black text-slate-700 dark:text-slate-300 block">
+                          ₹{course.fees.toLocaleString('en-IN')}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] font-extrabold text-amber-600 uppercase">Student Fee</span>
+                        <span className="text-xs font-black text-amber-600 dark:text-amber-400 block">
+                          ₹{course.collegeFees.toLocaleString('en-IN')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-6 border-t border-light-border dark:border-dark-border mt-auto">
+                    <Link
+                      href="/courses"
+                      className="w-full py-3 rounded-xl bg-slate-50 border border-light-border text-slate-800 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-850 text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-1"
+                    >
+                      <span>Learn More</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Link to Courses route */}
+            <div className="text-center">
+              <Link
+                href="/courses"
+                className="inline-flex items-center space-x-2 px-8 py-4 rounded-xl bg-primary hover:bg-primary-light text-white font-bold text-sm shadow-md shadow-blue-500/10 transition-all hover:-translate-y-0.5 active:translate-y-0 dark:bg-blue-600 dark:hover:bg-blue-500"
+              >
+                <span>Explore All 9 Courses & Syllabus</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+          </div>
+        </section>
 
         {/* Testimonials */}
         <Testimonials />
-
-        {/* Placement Support */}
-        <PlacementSupport />
-
-        {/* Lead Capture Hub (Forms) */}
-        <LeadMagnets />
-
-        {/* FAQs */}
-        <FAQs />
       </main>
 
       <Footer />
 
-      {/* Global Interactive Chat Advisor */}
       <AICourseAdvisor />
-
-      {/* Scroll trackers & Mobile quick tabs */}
       <Popups />
 
       {/* Brochure Download Form Modal */}
@@ -109,7 +217,6 @@ export default function Home() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="relative w-full max-w-md p-6 sm:p-8 rounded-2xl border border-light-border dark:border-dark-border bg-white dark:bg-dark-card shadow-2xl overflow-hidden"
             >
-              {/* Top border strip */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary to-blue-400" />
               
               <button 

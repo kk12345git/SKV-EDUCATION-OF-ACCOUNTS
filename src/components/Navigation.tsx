@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from './ThemeProvider';
 import { Sun, Moon, Menu, X, Phone, MessageCircle, Calendar } from 'lucide-react';
 
@@ -10,6 +12,7 @@ export default function Navigation() {
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
@@ -22,23 +25,7 @@ export default function Navigation() {
 
   if (!mounted) return null;
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
+  const isActive = (path: string) => pathname === path;
 
   return (
     <header
@@ -51,7 +38,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" onClick={(e) => handleNavClick(e, 'hero')} className="flex items-center space-x-3 group">
+          <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative w-10 h-10 overflow-hidden rounded-lg premium-border bg-white p-1">
               <Image
                 src="/SKV LOGO.jpeg"
@@ -69,45 +56,50 @@ export default function Navigation() {
                 OF ACCOUNTS
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a
-              href="#courses"
-              onClick={(e) => handleNavClick(e, 'courses')}
-              className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
+            <Link
+              href="/courses"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/courses')
+                  ? 'text-primary dark:text-blue-400 font-bold'
+                  : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400'
+              }`}
             >
               Courses
-            </a>
-            <a
-              href="#why-choose-us"
-              onClick={(e) => handleNavClick(e, 'why-choose-us')}
-              className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
+            </Link>
+            <Link
+              href="/why-choose-us"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/why-choose-us')
+                  ? 'text-primary dark:text-blue-400 font-bold'
+                  : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400'
+              }`}
             >
               Why SKV
-            </a>
-            <a
-              href="#career-growth"
-              onClick={(e) => handleNavClick(e, 'career-growth')}
-              className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
+            </Link>
+            <Link
+              href="/career"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/career')
+                  ? 'text-primary dark:text-blue-400 font-bold'
+                  : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400'
+              }`}
             >
               Career Growth
-            </a>
-            <a
-              href="#journey"
-              onClick={(e) => handleNavClick(e, 'journey')}
-              className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
+            </Link>
+            <Link
+              href="/contact"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/contact')
+                  ? 'text-primary dark:text-blue-400 font-bold'
+                  : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400'
+              }`}
             >
-              Our Process
-            </a>
-            <a
-              href="#faq"
-              onClick={(e) => handleNavClick(e, 'faq')}
-              className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
-            >
-              FAQs
-            </a>
+              Contact
+            </Link>
           </nav>
 
           {/* Desktop Right CTAs */}
@@ -140,14 +132,13 @@ export default function Navigation() {
               <span>WhatsApp</span>
             </a>
 
-            <a
-              href="#demo-form"
-              onClick={(e) => handleNavClick(e, 'demo-form')}
+            <Link
+              href="/contact"
               className="flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-primary-light text-white text-xs font-bold shadow-sm shadow-blue-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 dark:bg-blue-600 dark:hover:bg-blue-500"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Book Free Demo</span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Right Menu & Theme Toggle */}
@@ -174,41 +165,42 @@ export default function Navigation() {
       {isOpen && (
         <div className="md:hidden border-t border-light-border dark:border-dark-border bg-white dark:bg-dark-bg absolute top-full left-0 right-0 py-6 px-4 shadow-xl flex flex-col space-y-4 animate-in fade-in slide-in-from-top-5 duration-200">
           <nav className="flex flex-col space-y-4">
-            <a
-              href="#courses"
-              onClick={(e) => handleNavClick(e, 'courses')}
-              className="text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-primary dark:hover:text-blue-400"
+            <Link
+              href="/courses"
+              onClick={() => setIsOpen(false)}
+              className={`text-base font-semibold ${
+                isActive('/courses') ? 'text-primary dark:text-blue-400' : 'text-slate-800 dark:text-slate-200'
+              }`}
             >
               Courses
-            </a>
-            <a
-              href="#why-choose-us"
-              onClick={(e) => handleNavClick(e, 'why-choose-us')}
-              className="text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-primary dark:hover:text-blue-400"
+            </Link>
+            <Link
+              href="/why-choose-us"
+              onClick={() => setIsOpen(false)}
+              className={`text-base font-semibold ${
+                isActive('/why-choose-us') ? 'text-primary dark:text-blue-400' : 'text-slate-800 dark:text-slate-200'
+              }`}
             >
               Why SKV
-            </a>
-            <a
-              href="#career-growth"
-              onClick={(e) => handleNavClick(e, 'career-growth')}
-              className="text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-primary dark:hover:text-blue-400"
+            </Link>
+            <Link
+              href="/career"
+              onClick={() => setIsOpen(false)}
+              className={`text-base font-semibold ${
+                isActive('/career') ? 'text-primary dark:text-blue-400' : 'text-slate-800 dark:text-slate-200'
+              }`}
             >
               Career Growth
-            </a>
-            <a
-              href="#journey"
-              onClick={(e) => handleNavClick(e, 'journey')}
-              className="text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-primary dark:hover:text-blue-400"
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className={`text-base font-semibold ${
+                isActive('/contact') ? 'text-primary dark:text-blue-400' : 'text-slate-800 dark:text-slate-200'
+              }`}
             >
-              Our Process
-            </a>
-            <a
-              href="#faq"
-              onClick={(e) => handleNavClick(e, 'faq')}
-              className="text-base font-semibold text-slate-800 dark:text-slate-200 hover:text-primary dark:hover:text-blue-400"
-            >
-              FAQs
-            </a>
+              Contact
+            </Link>
           </nav>
 
           <hr className="border-light-border dark:border-dark-border" />
@@ -230,14 +222,14 @@ export default function Navigation() {
               <MessageCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
               <span>WhatsApp</span>
             </a>
-            <a
-              href="#demo-form"
-              onClick={(e) => handleNavClick(e, 'demo-form')}
+            <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
               className="col-span-2 flex items-center justify-center space-x-2 py-3 rounded-lg bg-primary hover:bg-primary-light text-white text-sm font-bold shadow-md shadow-blue-500/10"
             >
               <Calendar className="w-4 h-4" />
               <span>Book Free Demo Class</span>
-            </a>
+            </Link>
           </div>
         </div>
       )}
